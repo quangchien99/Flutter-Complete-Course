@@ -17,7 +17,7 @@ class StartScreen extends StatelessWidget {
             height: 80,
           ),
           const Text(
-            'Quang Chien Pham',
+            'Learn Flutter Quizzes',
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,
@@ -26,11 +26,12 @@ class StartScreen extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          OutlinedButton(
+          OutlinedButton.icon(
             onPressed: () {},
             style: OutlinedButton.styleFrom(foregroundColor: Colors.white),
-            child: const Text('Start Quizz'),
-          )
+            icon: const Icon(Icons.arrow_right_alt),
+            label: const Text('Start Quizz'),
+          ),
         ],
       ),
     );
