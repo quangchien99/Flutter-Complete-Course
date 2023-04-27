@@ -31,6 +31,33 @@ class _CreateExpenseState extends State<CreateExpense> {
     });
   }
 
+  void _createExpenese() {
+    final enteredAmount = double.tryParse(_amountController.text);
+    final isAmountInValid = enteredAmount == null || enteredAmount <= 0;
+    //trim: remove space at first and end.
+    if (_titleController.text.trim().isEmpty ||
+        isAmountInValid ||
+        _selectedDated == null) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('Invalid Input'),
+          content: const Text(
+              'Please re-check value of title, amount or date was entered.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(ctx);
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+  }
+
   @override
   void dispose() {
     _titleController.dispose();
@@ -122,11 +149,7 @@ class _CreateExpenseState extends State<CreateExpense> {
                   },
                   child: const Text('Cancel')),
               ElevatedButton(
-                  onPressed: () {
-                    print(_titleController.text);
-                    print(_amountController.text);
-                  },
-                  child: const Text('Save'))
+                  onPressed: _createExpenese, child: const Text('Save'))
             ],
           )
         ],
