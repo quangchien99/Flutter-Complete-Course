@@ -14,6 +14,7 @@ class _CreateExpenseState extends State<CreateExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime? _selectedDated;
+  Category _selectedCategory = Category.leisure;
 
   void _showDatePicker() async {
     final now = DateTime.now();
@@ -85,8 +86,9 @@ class _CreateExpenseState extends State<CreateExpense> {
                           : formatter.format(_selectedDated!),
                     ),
                     IconButton(
-                        onPressed: _showDatePicker,
-                        icon: const Icon(Icons.calendar_month))
+                      onPressed: _showDatePicker,
+                      icon: const Icon(Icons.calendar_month),
+                    )
                   ],
                 ),
               ),
@@ -97,6 +99,23 @@ class _CreateExpenseState extends State<CreateExpense> {
           ),
           Row(
             children: [
+              DropdownButton(
+                  value: _selectedCategory,
+                  items: Category.values
+                      .map(
+                        (category) => DropdownMenuItem(
+                          value: category,
+                          child: Text(category.name.toString().toUpperCase()),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    if (value == null) {
+                      return;
+                    }
+                    _selectedCategory = value;
+                  }),
+              const Spacer(),
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
