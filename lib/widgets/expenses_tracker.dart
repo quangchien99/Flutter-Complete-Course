@@ -35,13 +35,19 @@ class _ExpensesTrackerState extends State<ExpensesTracker> {
         category: Category.travel),
   ];
 
-  void _addExpense() {
+  void _showAddExpenseBottomSheet() {
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
         context: context,
-        builder: (ctx) => CreateExpense());
+        builder: (ctx) => CreateExpense(onAddExpense: _addExpense));
+  }
+
+  void _addExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
   }
 
   @override
@@ -50,7 +56,7 @@ class _ExpensesTrackerState extends State<ExpensesTracker> {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: _addExpense,
+            onPressed: _showAddExpenseBottomSheet,
             icon: const Icon(Icons.add),
           )
         ],
