@@ -38,6 +38,7 @@ class _ExpensesTrackerState extends State<ExpensesTracker> {
 
   void _showAddExpenseBottomSheet() {
     showModalBottomSheet(
+        useSafeArea: true,
         isScrollControlled: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
