@@ -76,92 +76,99 @@ class _CreateExpenseState extends State<CreateExpense> {
 
   @override
   Widget build(BuildContext context) {
+    final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 56, 16, 16),
-      child: Column(
-        children: [
-          const Text('Create new expense'),
-          const SizedBox(
-            height: 16,
-          ),
-          TextField(
-            maxLength: 50,
-            controller: _titleController,
-            keyboardType: TextInputType.text,
-            decoration: const InputDecoration(
-              label: Text('Title'),
-            ),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Row(
+      padding: EdgeInsets.fromLTRB(16, 56, 16, keyboardSpace + 16),
+      child: SizedBox(
+        height: double.infinity,
+        child: SingleChildScrollView(
+          child: Column(
             children: [
-              Expanded(
-                child: TextField(
-                  maxLength: 50,
-                  controller: _amountController,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    prefixText: '\$ ',
-                    label: Text('Amount'),
-                  ),
+              const Text('Create new expense'),
+              const SizedBox(
+                height: 16,
+              ),
+              TextField(
+                maxLength: 50,
+                controller: _titleController,
+                keyboardType: TextInputType.text,
+                decoration: const InputDecoration(
+                  label: Text('Title'),
                 ),
               ),
               const SizedBox(
-                width: 16,
+                height: 16,
               ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      _selectedDated == null
-                          ? 'No selected date'
-                          : formatter.format(_selectedDated!),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      maxLength: 50,
+                      controller: _amountController,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        prefixText: '\$ ',
+                        label: Text('Amount'),
+                      ),
                     ),
-                    IconButton(
-                      onPressed: _showDatePicker,
-                      icon: const Icon(Icons.calendar_month),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Row(
-            children: [
-              DropdownButton(
-                  value: _selectedCategory,
-                  items: Category.values
-                      .map(
-                        (category) => DropdownMenuItem(
-                          value: category,
-                          child: Text(category.name.toString().toUpperCase()),
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          _selectedDated == null
+                              ? 'No selected date'
+                              : formatter.format(_selectedDated!),
                         ),
-                      )
-                      .toList(),
-                  onChanged: (value) {
-                    if (value == null) {
-                      return;
-                    }
-                    _selectedCategory = value;
-                  }),
-              const Spacer(),
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Cancel')),
-              ElevatedButton(
-                  onPressed: _createExpenese, child: const Text('Save'))
+                        IconButton(
+                          onPressed: _showDatePicker,
+                          icon: const Icon(Icons.calendar_month),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Row(
+                children: [
+                  DropdownButton(
+                      value: _selectedCategory,
+                      items: Category.values
+                          .map(
+                            (category) => DropdownMenuItem(
+                              value: category,
+                              child:
+                                  Text(category.name.toString().toUpperCase()),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (value) {
+                        if (value == null) {
+                          return;
+                        }
+                        _selectedCategory = value;
+                      }),
+                  const Spacer(),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Cancel')),
+                  ElevatedButton(
+                      onPressed: _createExpenese, child: const Text('Save'))
+                ],
+              )
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   }
