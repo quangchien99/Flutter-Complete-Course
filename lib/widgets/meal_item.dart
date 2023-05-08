@@ -49,6 +49,7 @@ class MealItem extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 44),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       meal.title,
@@ -66,6 +67,7 @@ class MealItem extends StatelessWidget {
                       height: 12,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         MealItemTrait(
                             icon: Icons.schedule,
