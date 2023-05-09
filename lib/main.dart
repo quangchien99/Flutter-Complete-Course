@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:meals_app/data/dummy_data.dart';
 import 'package:meals_app/screens/categories_screen.dart';
 import 'package:meals_app/screens/meals_screen.dart';
+import 'package:meals_app/screens/tabs_screen.dart';
 
 final theme = ThemeData(
   useMaterial3: true,
@@ -23,13 +24,13 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: theme,
-      home:
-          // MealsScreen(
-          //   title: "Some category",
-          //   meals: availableMeals,
-          // ),
-          CategoriesScreen(),
-    );
+        theme: theme,
+        home:
+            // MealsScreen(
+            //   title: "Some category",
+            //   meals: availableMeals,
+            // ),
+            // CategoriesScreen(),
+            const TabsScreen());
   }
 }
