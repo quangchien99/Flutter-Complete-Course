@@ -15,7 +15,7 @@ class PlacesList extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .bodyLarge!
-              .copyWith(color: Theme.of(context).colorScheme.background),
+              .copyWith(color: Colors.white),
         ),
       );
     }
